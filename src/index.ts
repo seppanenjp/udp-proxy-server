@@ -60,7 +60,7 @@ const data1 = Buffer.from(
     payload: {
       deviceId: "12412",
       chip: "205275",
-      timestamp: "2020-01-01 10:00:00",
+      timestamp: "2020-01-01T10:00:00Z",
     },
   } as Message)
 );
