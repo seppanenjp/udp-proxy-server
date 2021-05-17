@@ -27,7 +27,7 @@ server.bind(port);
 
 server.on(SocketEvent.Message, (data: string, remote: dgram.RemoteInfo) => {
   try {
-    parseMessage(data).map(async (msg: Message) => {
+    parseMessage(data).forEach(async (msg: Message) => {
       switch (msg.type) {
         case MessageType.Passing:
           await naviClient.savePassing(msg.payload);
