@@ -9,14 +9,14 @@ const port = 60709;
 
 config();
 
-export enum UDPEvent {
+export enum SocketEvent {
   Message = "message",
   Listening = "listening",
 }
 
 const naviClient = new NavisportClient();
 
-server.on(UDPEvent.Listening, () => {
+server.on(SocketEvent.Listening, () => {
   const addressInfo: AddressInfo = server.address();
   console.log(
     `UDP Server listening on ${addressInfo.address} : ${addressInfo.port}`
@@ -25,7 +25,7 @@ server.on(UDPEvent.Listening, () => {
 
 server.bind(port);
 
-server.on(UDPEvent.Message, (data: string, remote: dgram.RemoteInfo) => {
+server.on(SocketEvent.Message, (data: string, remote: dgram.RemoteInfo) => {
   try {
     parseMessage(data).map(async (msg: Message) => {
       switch (msg.type) {
@@ -47,8 +47,8 @@ const sendResponse = (host: string, port: number, msg: Buffer): void =>
 
 const client = dgram.createSocket("udp4");
 
-client.on(UDPEvent.Message, (msg, info) =>
-  console.log("Data received from server : " + msg.toString())
+client.on(SocketEvent.Message, (msg: Buffer) =>
+  console.log(`Data received from server : ${msg.toString()}`)
 );
 
 // packageId is nanoid, uuid or something else
