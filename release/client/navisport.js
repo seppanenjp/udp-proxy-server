@@ -26,4 +26,3 @@ class NavisportClient {
     }
 }
 exports.NavisportClient = NavisportClient;
-//# sourceMappingURL=navisport.js.map

@@ -2,12 +2,11 @@
     "compilerOptions": {
       "target": "es6",
       "module": "commonjs",
-      "outDir": "dist",
-      "sourceMap": true,
+      "outDir": "release",
+      "sourceMap": false,
       "emitDecoratorMetadata": true,
       "experimentalDecorators": true
     },
     "include": ["src/**/*.ts"],
     "exclude": ["node_modules", ".vscode"]
   }
-  

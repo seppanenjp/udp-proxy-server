@@ -10,4 +10,3 @@ class Passing {
 }
 exports.Passing = Passing;
 exports.parseMessage = (msg) => JSON.parse(`[${msg.toString()}]`.replace(/}{/g, "},{"));
-//# sourceMappingURL=parser.js.map

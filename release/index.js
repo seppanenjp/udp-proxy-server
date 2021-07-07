@@ -41,4 +41,3 @@ const sendResponse = (remote, data) => {
     const msg = Buffer.from(JSON.stringify(data));
     server.send(msg, 0, msg.length, remote.port, remote.address);
 };
-//# sourceMappingURL=index.js.map
