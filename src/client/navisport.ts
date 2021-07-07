@@ -1,19 +1,29 @@
 import { Passing } from "../utils/parser";
-import axios from "axios";
+import * as https from "https";
 
-const NAVISPORT_BASE_URL = "https://navisport.fi/api";
+const NAVISPORT_HOST = "https://navisport.fi/api";
 
 export class NavisportClient {
-  async savePassing(payload: Passing): Promise<void> {
-    return axios
-      .post(`${NAVISPORT_BASE_URL}/devices/data`, payload)
-      .then((res) => {
-        console.log("Navisport server response", res.data);
-      })
-      .catch(console.log);
+  savePassing(payload: Passing): void {
+    const data = JSON.stringify(payload);
+    const options = {
+      hostname: NAVISPORT_HOST,
+      path: "/devices/data",
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Content-Length": data.length,
+      },
+    };
+    https.request(options);
   }
 
-  async ping(deviceId: string): Promise<void> {
-    return axios.get(`/devices/${deviceId}/ping`);
+  ping(deviceId: string): void {
+    const options = {
+      hostname: NAVISPORT_HOST,
+      path: `/devices/${deviceId}/ping`,
+      method: "GET",
+    };
+    https.request(options);
   }
 }

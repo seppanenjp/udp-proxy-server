@@ -20,14 +20,14 @@ server.bind(port);
 
 server.on(SocketEvent.Message, (data: string, remote: dgram.RemoteInfo) => {
   try {
-    parseMessage(data).forEach(async (msg: Message) => {
+    parseMessage(data).forEach((msg: Message) => {
       switch (msg.type) {
         case MessageType.Passing:
         case MessageType.PostPassing:
-          await naviClient.savePassing(msg.payload);
+          naviClient.savePassing(msg.payload);
           break;
         case MessageType.Ping:
-          await naviClient.ping(msg.deviceId);
+          naviClient.ping(msg.deviceId);
           break;
       }
       if (msg.packageId) {
