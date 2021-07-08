@@ -3,8 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const https = require("https");
 const NAVISPORT_HOST = "https://navisport.fi/api";
 class NavisportClient {
-    savePassing(payload) {
-        const data = JSON.stringify(payload);
+    savePassing(payload, deviceId) {
+        const data = JSON.stringify(Object.assign({}, payload, { deviceId }));
         const options = {
             hostname: NAVISPORT_HOST,
             path: "/devices/data",

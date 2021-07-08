@@ -19,7 +19,7 @@ server.on(SocketEvent.Message, (data, remote) => {
             switch (msg.type) {
                 case parser_1.MessageType.Passing:
                 case parser_1.MessageType.PostPassing:
-                    naviClient.savePassing(msg.payload);
+                    naviClient.savePassing(msg.payload, msg.deviceId);
                     break;
                 case parser_1.MessageType.Ping:
                     naviClient.ping(msg.deviceId);
@@ -27,8 +27,8 @@ server.on(SocketEvent.Message, (data, remote) => {
             }
             if (msg.packageId) {
                 sendResponse(remote, {
-                    packageId: msg.packageId,
-                    type: parser_1.MessageType.Acknowledgment,
+                    packageId: "1",
+                    type: "Acknowledgment",
                 });
             }
         });

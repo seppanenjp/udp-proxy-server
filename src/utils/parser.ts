@@ -13,7 +13,7 @@ export interface Message {
 }
 
 export class Passing {
-  deviceId: string;
+  deviceId?: string;
   chip: string;
   timestamp: string; // Date;
 }

@@ -24,7 +24,7 @@ server.on(SocketEvent.Message, (data: string, remote: dgram.RemoteInfo) => {
       switch (msg.type) {
         case MessageType.Passing:
         case MessageType.PostPassing:
-          naviClient.savePassing(msg.payload);
+          naviClient.savePassing(msg.payload, msg.deviceId);
           break;
         case MessageType.Ping:
           naviClient.ping(msg.deviceId);
@@ -32,8 +32,8 @@ server.on(SocketEvent.Message, (data: string, remote: dgram.RemoteInfo) => {
       }
       if (msg.packageId) {
         sendResponse(remote, {
-          packageId: msg.packageId,
-          type: MessageType.Acknowledgment,
+          packageId: "1",
+          type: "Acknowledgment",
         });
       }
     });

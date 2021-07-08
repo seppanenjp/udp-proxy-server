@@ -4,8 +4,8 @@ import * as https from "https";
 const NAVISPORT_HOST = "https://navisport.fi/api";
 
 export class NavisportClient {
-  savePassing(payload: Passing): void {
-    const data = JSON.stringify(payload);
+  savePassing(payload: Passing, deviceId: string): void {
+    const data = JSON.stringify({ ...payload, deviceId });
     const options = {
       hostname: NAVISPORT_HOST,
       path: "/devices/data",
