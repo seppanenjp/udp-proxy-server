@@ -1,6 +1,5 @@
 import { Passing } from "../utils/parser";
 import * as https from "https";
-import * as http from "http";
 
 const NAVISPORT_HOST = "navisport.fi";
 
@@ -19,7 +18,7 @@ export class NavisportClient {
         "Content-Length": data.length,
       },
     };
-    const request = http.request(options);
+    const request = https.request(options);
     request.write(data);
     request.end();
   }

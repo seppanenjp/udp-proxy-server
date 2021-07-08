@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const https = require("https");
-const http = require("http");
 const NAVISPORT_HOST = "navisport.fi";
 class NavisportClient {
     savePassing(payload, deviceId) {
@@ -15,7 +14,7 @@ class NavisportClient {
                 "Content-Length": data.length,
             },
         };
-        const request = http.request(options);
+        const request = https.request(options);
         request.write(data);
         request.end();
     }
