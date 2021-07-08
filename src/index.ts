@@ -3,7 +3,7 @@ import { Message, MessageType, parseMessage } from "./utils/parser";
 import dgram = require("dgram");
 
 const server = dgram.createSocket("udp4");
-const port = 60709;
+const port = 15949;
 
 export enum SocketEvent {
   Message = "message",

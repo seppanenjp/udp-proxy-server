@@ -4,7 +4,7 @@ const navisport_1 = require("./client/navisport");
 const parser_1 = require("./utils/parser");
 const dgram = require("dgram");
 const server = dgram.createSocket("udp4");
-const port = 60709;
+const port = 15949;
 var SocketEvent;
 (function (SocketEvent) {
     SocketEvent["Message"] = "message";
