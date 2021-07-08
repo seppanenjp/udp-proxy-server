@@ -16,12 +16,15 @@ server.bind(port);
 server.on(SocketEvent.Message, (data, remote) => {
     try {
         parser_1.parseMessage(data).forEach((msg) => {
+            console.log("Got message", msg);
             switch (msg.type) {
                 case parser_1.MessageType.Passing:
                 case parser_1.MessageType.PostPassing:
+                    console.log("passing type message");
                     naviClient.savePassing(msg.payload, msg.deviceId);
                     break;
                 case parser_1.MessageType.Ping:
+                    console.log("ping type message");
                     if (Array.isArray(msg.deviceId)) {
                         msg.deviceId.forEach((id) => {
                             naviClient.ping(id);

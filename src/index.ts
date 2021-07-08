@@ -21,12 +21,15 @@ server.bind(port);
 server.on(SocketEvent.Message, (data: string, remote: dgram.RemoteInfo) => {
   try {
     parseMessage(data).forEach((msg: Message) => {
+      console.log("Got message", msg);
       switch (msg.type) {
         case MessageType.Passing:
         case MessageType.PostPassing:
+          console.log("passing type message");
           naviClient.savePassing(msg.payload, msg.deviceId as string);
           break;
         case MessageType.Ping:
+          console.log("ping type message");
           if (Array.isArray(msg.deviceId)) {
             msg.deviceId.forEach((id: string) => {
               naviClient.ping(id);
