@@ -32,8 +32,8 @@ server.on(SocketEvent.Message, (data: string, remote: dgram.RemoteInfo) => {
       }
       if (msg.packageId) {
         sendResponse(remote, {
-          packageId: "1",
-          type: "Acknowledgment",
+          packageId: msg.packageId,
+          type: MessageType.Acknowledgment,
         });
       }
     });

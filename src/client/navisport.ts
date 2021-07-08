@@ -1,7 +1,8 @@
 import { Passing } from "../utils/parser";
 import * as https from "https";
+import * as http from "http";
 
-const NAVISPORT_HOST = "https://navisport.fi/api";
+const NAVISPORT_HOST = "localhost";
 
 export class NavisportClient {
   savePassing(payload: Passing, deviceId: string): void {
@@ -11,22 +12,26 @@ export class NavisportClient {
     });
     const options = {
       hostname: NAVISPORT_HOST,
-      path: "/devices/data",
+      path: "/api/devices/data",
+      port: 8080,
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "Content-Length": data.length,
       },
     };
-    https.request(options);
+    const request = http.request(options);
+    request.write(data);
+    request.end();
   }
 
   ping(deviceId: string): void {
     const options = {
       hostname: NAVISPORT_HOST,
-      path: `/devices/${deviceId}/ping`,
+      path: `/api/devices/${deviceId}/ping`,
       method: "GET",
     };
-    https.request(options);
+    const request = https.request(options);
+    request.end();
   }
 }
