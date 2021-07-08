@@ -14,12 +14,7 @@ class NavisportClient {
                 "Content-Length": data.length,
             },
         };
-        const request = https.request(options, (res) => {
-            console.log(`data statusCode: ${res.statusCode}`);
-            res.on("data", (d) => {
-                process.stdout.write(d);
-            });
-        });
+        const request = https.request(options);
         request.on("error", (error) => {
             console.error(error);
         });
@@ -32,12 +27,7 @@ class NavisportClient {
             path: `/api/devices/${deviceId}/ping`,
             method: "GET",
         };
-        const request = https.request(options, (res) => {
-            console.log(`ping statusCode: ${res.statusCode}`);
-            res.on("data", (d) => {
-                process.stdout.write(d);
-            });
-        });
+        const request = https.request(options);
         request.on("error", (error) => {
             console.error(error);
         });
