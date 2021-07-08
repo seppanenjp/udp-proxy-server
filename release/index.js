@@ -35,6 +35,8 @@ server.on(SocketEvent.Message, (data, remote) => {
                         type: parser_1.MessageType.Ping,
                     });
                     break;
+                default:
+                    console.log("Unknown package type!");
             }
             if (msg.packageId) {
                 sendResponse(remote, {
@@ -45,7 +47,7 @@ server.on(SocketEvent.Message, (data, remote) => {
         });
     }
     catch (e) {
-        // Be happy and continue :)
+        console.log("Unable to parse data message", e);
     }
 });
 const sendResponse = (remote, data) => {

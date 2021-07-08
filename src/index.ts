@@ -39,6 +39,8 @@ server.on(SocketEvent.Message, (data: string, remote: dgram.RemoteInfo) => {
             type: MessageType.Ping,
           });
           break;
+        default:
+          console.log("Unknown package type!");
       }
       if (msg.packageId) {
         sendResponse(remote, {
@@ -48,7 +50,7 @@ server.on(SocketEvent.Message, (data: string, remote: dgram.RemoteInfo) => {
       }
     });
   } catch (e) {
-    // Be happy and continue :)
+    console.log("Unable to parse data message", e);
   }
 });
 

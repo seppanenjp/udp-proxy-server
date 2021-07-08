@@ -15,9 +15,7 @@ class NavisportClient {
             },
         };
         const request = https.request(options);
-        request.on("error", (error) => {
-            console.error(error);
-        });
+        request.on("error", (error) => console.log("Unable to send passings", error));
         request.write(data);
         request.end();
     }
@@ -28,9 +26,7 @@ class NavisportClient {
             method: "GET",
         };
         const request = https.request(options);
-        request.on("error", (error) => {
-            console.error(error);
-        });
+        request.on("error", (error) => console.log("Unable to ping", error));
         request.end();
     }
 }
