@@ -24,10 +24,20 @@ server.on(SocketEvent.Message, (data: string, remote: dgram.RemoteInfo) => {
       switch (msg.type) {
         case MessageType.Passing:
         case MessageType.PostPassing:
-          naviClient.savePassing(msg.payload, msg.deviceId);
+          naviClient.savePassing(msg.payload, msg.deviceId as string);
           break;
         case MessageType.Ping:
-          naviClient.ping(msg.deviceId);
+          if (Array.isArray(msg.deviceId)) {
+            msg.deviceId.forEach((id: string) => {
+              naviClient.ping(id);
+            });
+          } else {
+            naviClient.ping(msg.deviceId);
+          }
+          sendResponse(remote, {
+            deviceId: "Navisport-UDP",
+            type: MessageType.Ping,
+          });
           break;
       }
       if (msg.packageId) {

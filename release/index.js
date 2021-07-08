@@ -22,7 +22,18 @@ server.on(SocketEvent.Message, (data, remote) => {
                     naviClient.savePassing(msg.payload, msg.deviceId);
                     break;
                 case parser_1.MessageType.Ping:
-                    naviClient.ping(msg.deviceId);
+                    if (Array.isArray(msg.deviceId)) {
+                        msg.deviceId.forEach((id) => {
+                            naviClient.ping(id);
+                        });
+                    }
+                    else {
+                        naviClient.ping(msg.deviceId);
+                    }
+                    sendResponse(remote, {
+                        deviceId: "Navisport-UDP",
+                        type: parser_1.MessageType.Ping,
+                    });
                     break;
             }
             if (msg.packageId) {

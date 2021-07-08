@@ -7,7 +7,7 @@ export enum MessageType {
 
 export interface Message {
   packageId: string;
-  deviceId: string;
+  deviceId: string | string[];
   payload: Passing;
   type: MessageType;
 }
