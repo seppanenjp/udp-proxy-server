@@ -4,7 +4,7 @@ const https = require("https");
 const NAVISPORT_HOST = "https://navisport.fi/api";
 class NavisportClient {
     savePassing(payload, deviceId) {
-        const data = JSON.stringify(Object.assign({}, payload, { deviceId }));
+        const data = JSON.stringify(Object.assign({}, payload, { deviceId: payload.deviceId || deviceId }));
         const options = {
             hostname: NAVISPORT_HOST,
             path: "/devices/data",

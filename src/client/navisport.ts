@@ -5,7 +5,10 @@ const NAVISPORT_HOST = "https://navisport.fi/api";
 
 export class NavisportClient {
   savePassing(payload: Passing, deviceId: string): void {
-    const data = JSON.stringify({ ...payload, deviceId });
+    const data = JSON.stringify({
+      ...payload,
+      deviceId: payload.deviceId || deviceId,
+    });
     const options = {
       hostname: NAVISPORT_HOST,
       path: "/devices/data",
