@@ -1,7 +1,7 @@
 # UDP-Proxy-Server
 UDP Proxy Server to Navisport
 
-### Start server to default port (60709)
+### Start server to default port (15949)
 ```bash
 node ./release/index.js
 ```
