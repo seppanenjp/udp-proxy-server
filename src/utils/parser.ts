@@ -2,6 +2,7 @@ export enum MessageType {
   Passing = "Passing",
   PostPassing = "PostPassing",
   Ping = "Ping",
+  Acknowledgment = "Acknowledgment",
 }
 
 export interface Message {

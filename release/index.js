@@ -28,7 +28,7 @@ server.on(SocketEvent.Message, (data, remote) => {
             if (msg.packageId) {
                 sendResponse(remote, {
                     packageId: msg.packageId,
-                    type: "acknowledgment",
+                    type: parser_1.MessageType.Acknowledgment,
                 });
             }
         });

@@ -5,6 +5,7 @@ var MessageType;
     MessageType["Passing"] = "Passing";
     MessageType["PostPassing"] = "PostPassing";
     MessageType["Ping"] = "Ping";
+    MessageType["Acknowledgment"] = "Acknowledgment";
 })(MessageType = exports.MessageType || (exports.MessageType = {}));
 class Passing {
 }
