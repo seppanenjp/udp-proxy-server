@@ -3,7 +3,7 @@ import { Message, MessageType, parseMessage } from "./utils/parser";
 import dgram = require("dgram");
 
 const server = dgram.createSocket("udp4");
-const port = 15949;
+const port = 15949; // Default port
 
 export enum SocketEvent {
   Message = "message",
@@ -24,29 +24,19 @@ server.on(SocketEvent.Message, (data: string, remote: dgram.RemoteInfo) => {
       switch (msg.type) {
         case MessageType.Passing:
         case MessageType.PostPassing:
-          naviClient.savePassing(msg.payload, msg.deviceId as string);
+          naviClient.savePassing(msg, remote);
           break;
         case MessageType.Ping:
           if (Array.isArray(msg.deviceId)) {
             msg.deviceId.forEach((id: string) => {
-              naviClient.ping(id);
+              naviClient.ping(id, remote);
             });
           } else {
-            naviClient.ping(msg.deviceId);
+            naviClient.ping(msg.deviceId, remote);
           }
-          sendResponse(remote, {
-            deviceId: "Navisport-UDP",
-            type: MessageType.Ping,
-          });
           break;
         default:
           console.log("Unknown package type!");
-      }
-      if (msg.packageId) {
-        sendResponse(remote, {
-          packageId: msg.packageId,
-          type: MessageType.Acknowledgment,
-        });
       }
     });
   } catch (e) {
@@ -54,7 +44,7 @@ server.on(SocketEvent.Message, (data: string, remote: dgram.RemoteInfo) => {
   }
 });
 
-const sendResponse = (remote: dgram.RemoteInfo, data: Object): void => {
+export const sendResponse = (remote: dgram.RemoteInfo, data: Object): void => {
   const msg = Buffer.from(JSON.stringify(data));
   server.send(msg, 0, msg.length, remote.port, remote.address);
 };
